@@ -1,0 +1,45 @@
+/*
+Using color scheme:
+#C5C1C0
+#0A1612
+#1A2930
+#F7CE3E
+*/
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    background-color: #C5C1C0;
+    padding: 10px;
+}
+
+header .top-right-header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+header .top-right-header a {
+    margin: 5px;
+}
+
+header h1 {
+    text-align: center;
+    margin-top: 0px;
+}
+
+header .nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0px; 
+}
+
+header .nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px; 
+    cursor: pointer;
+}
