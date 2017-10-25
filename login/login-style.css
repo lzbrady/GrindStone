@@ -26,7 +26,7 @@ body {
 header {
     background-color: #C5C1C0;
     padding: 10px;
-    height: 3.5em;
+    height: 4em;
 }
 
 .container {
@@ -50,4 +50,37 @@ header {
 
 .register {
     text-align: right;
+    margin-right: 5%;
+}
+
+.register p {
+    text-align: left;
+    margin-left: 4%;
+    font-size: 2em;
+}
+
+#first-name {
+    float: left;
+}
+
+#first-name, #last-name {
+    display: inline-block;
+    width: 45%;
+    margin-bottom: 1%;
+}
+
+.register-input input {
+    width: 100%;
+    margin-bottom: 1%;
+    height: 2rem;
+    font-size: 1em;
+}
+
+.sign-up {
+    width: 100%;
+    height: 8%;
+}
+
+table a {
+    font-size: 10px;
 }
