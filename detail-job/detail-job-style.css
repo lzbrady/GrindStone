@@ -1,0 +1,138 @@
+/* 
+#77c9d4
+#57bc90
+#015249
+#a5a5af 
+*/
+
+.container {
+    width: 75%;
+    margin: auto;
+    background-color: #fff;
+}
+
+
+/*Top info - image and job info*/
+
+#top-info {
+    height: 50%;
+    overflow: hidden;
+}
+
+#top-info img {
+    width: 60%;
+    float: left;
+}
+
+#job-info {
+    background-color: #015249;
+    color: #fff;
+}
+
+.job-info-btn {
+    margin: 0px;
+    padding: 2%;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.job-info-content {
+    display: none;
+}
+
+.job-info-content {
+    padding: 3%;
+    background-color: #57bc90;
+}
+
+hr {
+    margin: 0px;
+}
+
+.description {
+    margin: auto;
+}
+
+
+/*Comments*/
+
+#at {
+    display: inline-block;
+    padding: 3px;
+    background-color: grey;
+    margin-right: -4px;
+    margin-bottom: 4px;
+}
+
+.comment-handle {
+    display: inline-block;
+    background-color: #a5a5af;
+    width: 200px;
+    padding: 3px;
+    margin-bottom: 4px;
+}
+
+.comment-handle:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.comments {
+    background-color: bisque;
+    padding: 10px;
+}
+
+#comments-heading {
+    font-size: 20px;
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.input-comment-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+#input-comment {
+    box-sizing: border-box;
+    width: calc(100% - 150px);
+    height: 30px;
+    border: none;
+    border-bottom: 0.05px #a5a5af solid;
+    background-color: bisque;
+    outline: none;
+    -webkit-transition: border-bottom 0.5s linear;
+    transition: border-bottom 0.5s linear;
+    transform-origin: center;
+}
+
+#input-comment:focus {
+    border-bottom: 1.5px black solid;    
+}
+
+#input-comment-btn {}
+
+.button {
+    box-sizing: border-box;
+    padding: 0px 20px;
+    border: none;
+    height: 30px;
+    background-color: #57bc90;
+    color: #fff;
+    border-radius: 4%;
+    -webkit-transition: background-color 0.5s ease; /* Safari */
+    transition: background-color 0.5s ease;
+}
+
+.button:hover {
+    background-color: #015249;  
+}
+
+button, .comment-handle {
+    cursor: pointer;
+}

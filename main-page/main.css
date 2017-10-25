@@ -1,0 +1,90 @@
+/*
+Using color scheme:
+#C5C1C0
+#0A1612
+#1A2930
+#F7CE3E
+*/
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    background-color: #C5C1C0;
+    padding: 10px;
+}
+
+header .top-right-header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+header .top-right-header a {
+    margin: 5px;
+}
+
+header h1 {
+    text-align: center;
+    margin-top: 0px;
+}
+
+header .nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0px; 
+}
+
+header .nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px; 
+    cursor: pointer;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+  #content{
+    margin: 20px;
+    border: 3px solid #1A2930;
+    padding: 20px;
+    box-shadow: 10px 10px 5px #888888;
+  }
+
+  button{
+    display: inline-block;
+  }
+  input{
+    display: inline-block;
+  }
+  .one {
+    grid-column: 1;
+    grid-row: 1;
+    /* margin: 20px; */
+  }
+  .two { 
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .three {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .four {
+    grid-column: 4;
+    grid-row: 1;
+  }
+  .five {
+    grid-column: 1/2;
+    grid-row: 2;
+  }
+  .six {
+    grid-column: 2/2;
+    grid-row: 2;
+  }
