@@ -46,13 +46,27 @@ header .nav ul li {
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
+}
+  #content{
+    margin: 20px;
+    border: 3px solid #1A2930;
+    padding: 20px;
+    box-shadow: 10px 10px 5px #888888;
+  }
+
+  button{
+    display: inline-block;
+  }
+  input{
+    display: inline-block;
   }
   .one {
     grid-column: 1;
     grid-row: 1;
+    /* margin: 20px; */
   }
   .two { 
     grid-column: 2;
