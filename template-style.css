@@ -1,18 +1,24 @@
 /*
-Using color scheme:
+Color Schemes:
 #C5C1C0
 #0A1612
 #1A2930
 #F7CE3E
+
+#77c9d4
+#57bc90
+#015249
+#a5a5af
 */
 
 html, body {
     margin: 0px;
     padding: 0px;
+    background-color: #fff;
 }
 
 header {
-    background-color: #C5C1C0;
+    background-color: #57bc90;
     padding: 10px;
 }
 

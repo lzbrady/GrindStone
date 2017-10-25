@@ -4,12 +4,17 @@ $(document).ready(function () {
 
     //Toggling job info divs
     $('.job-info-btn').click(function () {
-        //Hide the rest of them
-        let contents = $('.job-info-content');
-        for (let i = 0; i < contents.length; i++) {
-            $(contents[i]).hide();
+        //First check to see if clicking on already displayed element, if so close it and don't display anythign else
+        if (this.nextElementSibling.style.display == 'block') {
+            $(this).next().hide();
+        } else {
+            //Hide the rest of them
+            let contents = $('.job-info-content');
+            for (let i = 0; i < contents.length; i++) {
+                $(contents[i]).hide();
+            }
+            $(this).next().show();
         }
-        $(this).next().show();
     });
 
     function getComments() {
