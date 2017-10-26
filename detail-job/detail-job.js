@@ -28,3 +28,7 @@ $(document).ready(function () {
 
     getComments();
 });
+
+function loadMain() {  
+    window.location.href = "../main-page/main.html";
+}
