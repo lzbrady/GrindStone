@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="../template-style.css">
+    <link rel="stylesheet" href="my-account-style.css">
 
     <title>GrindStone | Home</title>
 </head>
+
 <body>
     <header>
         <h1>GrindStone</h1>
@@ -20,12 +23,64 @@
 
         <nav class="nav">
             <ul>
-                <li>Home</li>
-                <li>Jobs</li>
-                <li>Projects</li>
-                <li>Users</li>
+                <li>
+                    <a id="home" href="../main-page/main.html">Home</a>
+                </li>
+                <li>
+                    <a id="jobs" href="../jobs-page/job.html">Jobs</a>
+                </li>
+                <li>
+                    <a id="projects" href="../projects-page/projects.html">Projects</a>
+                </li>
+                <li>
+                    <a id="users" href="user.html">Users</a>
+                </li>
             </ul>
         </nav>
     </header>
+
+    <div class="container">
+        <div class="profile-picture">
+            <p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/John_Smith_%28b1950%29.jpg" alt="Profile Picture">
+            </p>
+        </div>
+
+        <div class="right-pane">
+            <div class="profile-info">
+                <h1>John Smith</h1>
+                <table class="profile-bio">
+                    <tr>
+                        <td>Bio:</td>
+                        <td>
+                            <span>Biography <br /> Github Link <br /> Other stuff <br /> Work Experience</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="reviews">
+                <h3>Reviews</h3>
+                <div class="review">
+                    <span class="rating">5 / 5</span>
+                    <span class="rating-description">This is a review</span>
+                    <br>
+                    <a class="reviewer" href="">- Reviewer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills">
+            <h3>Skills</h3>
+            <ul>
+                <li>Skill 1</li>
+                <li>Skill 2</li>
+                <li>Skill 3</li>
+                <li>Skill 4</li>
+            </ul>
+        </div>
+
+    </div>
 </body>
+
 </html>
