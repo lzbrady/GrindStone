@@ -1,0 +1,22 @@
+{
+  "name": "grindstone-master",
+  "version": "1.0.0",
+  "description": "GrindStone connects people who need software done to amateur developers, and allows amateur developers to have their work reviewed.",
+  "main": "../main-page/main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lzbrady/GrindStone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lzbrady/GrindStone/issues"
+  },
+  "homepage": "https://github.com/lzbrady/GrindStone#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
