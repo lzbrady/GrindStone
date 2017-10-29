@@ -3,8 +3,13 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const jobsSchema = new mongoose.Schema({
-    
+    name: String,
+    description: String,
+    comment: [String],
+    contactInfo: String,
+    userPublisher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    userWorkers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
-const Job = mongoose.model('Project', jobsSchema);
+const Job = mongoose.model('Job', jobsSchema);
 module.exports = Job;
