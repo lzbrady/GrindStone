@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 
 const port = 3000;
-const dbURI = ''; // TODO: Fill in dbURI
+const dbURI = 'mongodb://localhost/grindstonedb'; // TODO: Fill in dbURI
 
 mongoose.connect(dbURI, {
     useMongoClient: true
