@@ -1,44 +1,60 @@
 .wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
-  #content{
-    margin: 20px;
-    border: 3px solid #1A2930;
-    padding: 20px;
-    box-shadow: 10px 10px 5px #888888;
-  }
 
-  button{
-    display: inline-block;
-  }
-  input{
-    display: inline-block;
-  }
-  .one {
-    grid-column: 1;
-    grid-row: 1;
-    /* margin: 20px; */
-  }
-  .two { 
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .three {
-    grid-column: 3;
-    grid-row: 1;
-  }
-  .four {
-    grid-column: 4;
-    grid-row: 1;
-  }
-  .five {
-    grid-column: 1/2;
-    grid-row: 2;
-  }
-  .six {
-    grid-column: 2/2;
-    grid-row: 2;
-  }
+#content {
+  margin: 20px;
+  border: 3px solid #1A2930;
+  padding: 20px;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+button {
+  display: inline-block;
+}
+
+input {
+  display: inline-block;
+}
+
+.one {
+  grid-column: 1;
+  grid-row: 1;
+  /* margin: 20px; */
+}
+
+.two {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.three {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.four {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.five {
+  grid-column: 1/2;
+  grid-row: 2;
+}
+
+.six {
+  grid-column: 2/2;
+  grid-row: 2;
+}
+
+#add-project {
+  width: 75%;
+  margin: auto;
+  display: block;
+  height: 50px;
+  margin-top: 10px;
+}
