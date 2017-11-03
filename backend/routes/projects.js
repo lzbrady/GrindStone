@@ -30,7 +30,7 @@ router.route('/')
     .get((req, res) => {
         PROJECT.find({}, (err, projects) => {
             if (err) {
-                handleError(err, res, "No Projects Found", 404);
+                handleError(err, res, 'Not Found', 404);
             } else {
                 res.json(projects);
             }
@@ -44,6 +44,7 @@ router.route('/')
         PROJECT.create({
             name: req.body.name,
             description: req.body.description,
+            imageURL: req.body.imageURL,
             comment: [],
             contactInfo: req.body.contactInfo,
             userPublisher: req.body.userPublisher,
@@ -58,5 +59,16 @@ router.route('/')
             }
         });
     });
+
+//Specific project
+// .get((req, res) => {
+//     PROJECT.find({}, (err, projects) => {
+//         if (err) {
+//             handleError(err, res, "No Projects Found", 404);
+//         } else {
+//             res.json(projects);
+//         }
+//     });
+// })
 
 module.exports = router;

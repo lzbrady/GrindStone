@@ -3,6 +3,26 @@
     const apiUrl = "http://localhost:3000/projects/";
     let allProjects;
 
+    function getAllProjects() {
+        $(".wrapper").empty();
+        $.ajax({
+            url: apiUrl,
+            dataType: 'JSON',
+            type: 'GET',
+            success: (data) => {
+                if (data) {
+                    allProjects = data;
+                    displayAllProjects(allProjects);
+                } else {
+                    displayAllProjects(null);
+                }
+            },
+            error: (request, status, error) => {
+                console.log("ERROR " + error);
+            }
+        })
+    }
+
     function createAddProjectForm() {
         $(".wrapper").empty();
         const container = $("#add-project-div").empty();
@@ -17,6 +37,9 @@
         //Email
         form.append('<label for="email">Email</label>');
         form.append('<input type="text" name="email" class="table-cell" placeholder="name@email.com"> <br />');
+        //Image
+        form.append('<label for="image">Image</label>');
+        form.append('<input type="text" name="image" class="table-cell" placeholder="url goes here"> <br />');
 
         form.append(submitButton);
         container.append(form);
@@ -32,6 +55,7 @@
             name: $('[name="name"]').val(),
             description: $('[name="description"]').val(),
             email: $('[name="email"]').val(),
+            imageURL: $('[name="image"]').val(),
             comment: [],
             owner: "Owner Name", //TODO: find user's name
             worker: null,
@@ -56,7 +80,44 @@
         });
     }
 
+    function displayAllProjects(projects) {
+        let currentProjectDiv;
+        if (projects) {
+            currentProjectDiv = $("<div>").addClass("project");
+            projects.forEach((project) => {
+                console.log("Project:");
+                console.log(project);
+                let comments;
+                if (project.comment) {
+                    comments = [];
+                    project.comment.forEach((comment) => {
+                        comments.push(comment);
+                    });
+                } else {
+                    comments = "No comments yet";
+                }
+                currentProjectDiv.append(
+                    '<div class="cover-image">' +
+                    '<img src="' + project.imageURL + '" alt="' + project.name + '"' +
+                    'width="200px">' +
+                    '</div>' +
+                    '<p>' + project.description + '</p>' +
+                    '<div>' +
+                    '<h3>' + project.name + '</h3>' +
+                    '<p> Posted By: ' + project.owner + '</p>' +
+                    '<p>' + (project.worker || "Not claimed yet") + '</p>' +
+                    '</div>' +
+                    '<div class="clear"></div>'
+                );
+            });
+        } else {
+            currentProjectDiv.append('<div>No projects to display yet :(</div>');
+        }
+        $(".wrapper").append(currentProjectDiv);
+    }
+
     $(document).ready(() => {
         $('#add-project').click(createAddProjectForm);
+        getAllProjects();
     });
 })();
