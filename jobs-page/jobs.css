@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.project {
+.job {
   width: 30%;
   overflow: hidden;
   background-color: aquamarine;
@@ -24,7 +24,7 @@
   padding-top: 0px;
 }
 
-#add-project {
+#add-job {
   width: 75%;
   margin: auto;
   display: block;

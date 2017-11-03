@@ -11,29 +11,52 @@
     background-color: #fff;
 }
 
+.wrapper {
+    display: inline-block;
+    width: 60%;
+}
+
 
 /*Top info - image and job info*/
+
+.job {
+    overflow: hidden;
+    background-color: aquamarine;
+    margin-top: 20px;
+    border: 3px solid #1A2930;
+    padding: 20px;
+    padding-top: 0px;
+    box-sizing: border-box;
+}
+
+.project-name {
+    text-align: center;
+}
+
+.description {
+    padding: 10px;
+    padding-top: 0px;
+}
 
 #top-info {
     height: 50%;
     overflow: hidden;
-}
-
-#top-info img {
-    width: 60%;
-    float: left;
+    margin-bottom: 20px;
 }
 
 #job-info {
     background-color: #015249;
     color: #fff;
+    display: inline-block;
+    width: 35%;
+    vertical-align: top;
+    margin-top: 20px;
 }
 
 .job-info-btn {
     margin: 0px;
-    padding: 2%;
     text-align: center;
-    font-size: 16px;
+    font-size: 1.25rem;
     cursor: pointer;
 }
 
@@ -42,16 +65,12 @@
 }
 
 .job-info-content {
-    padding: 3%;
+    /* padding: 6%; */
     background-color: #57bc90;
 }
 
 hr {
     margin: 0px;
-}
-
-.description {
-    margin: auto;
 }
 
 
@@ -109,7 +128,7 @@ hr {
 }
 
 #input-comment:focus {
-    border-bottom: 1.5px black solid;    
+    border-bottom: 1.5px black solid;
 }
 
 #input-comment-btn {}
@@ -122,14 +141,16 @@ hr {
     background-color: #57bc90;
     color: #fff;
     border-radius: 4%;
-    -webkit-transition: background-color 0.5s ease; /* Safari */
+    -webkit-transition: background-color 0.5s ease;
+    /* Safari */
     transition: background-color 0.5s ease;
 }
 
 .button:hover {
-    background-color: #015249;  
+    background-color: #015249;
 }
 
-button, .comment-handle {
+button,
+.comment-handle {
     cursor: pointer;
 }

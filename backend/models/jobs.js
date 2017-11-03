@@ -6,9 +6,11 @@ const jobsSchema = new mongoose.Schema({
     name: String,
     description: String,
     comments: [String],
-    contactInfo: String,
-    userPublisher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    userWorkers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    email: String,
+    website: String,
+    phone: String,
+    owner: String,
+    worker: String
 });
 
 const Job = mongoose.model('Job', jobsSchema);

@@ -10,11 +10,11 @@ const port = 3000;
 const dbURI = 'mongodb://localhost/grindstonedb';
 
 require("./models/projects");
-// require("./models/jobs");
+require("./models/jobs");
 // require("./models/users");
 
 const projectRoute = require('./routes/projects');
-// const jobsRoute = require('./routes/jobs');
+const jobsRoute = require('./routes/jobs');
 
 mongoose.connect(dbURI, {
     useMongoClient: true
@@ -36,7 +36,7 @@ app.use(cors());
 app.use(logger('dev'));
 
 app.use('/projects', projectRoute);
-// app.use('/jobs', jobsRoute);
+app.use('/jobs', jobsRoute);
 
 app.listen(port, function () {
     console.log(`Listening on port number ${port}.`);

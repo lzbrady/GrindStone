@@ -46,7 +46,7 @@
         const cancelButton = $('<button id="cancel-create-btn" type="submit" class="table-cell"> Cancel </button>');
 
         // Name
-        form.append('<label for="name">Name</label>');
+        form.append('<label for="name">Project Name</label>');
         form.append('<input required type="text" name="name" class="table-cell" placeholder="Project Name"> <br />');
 
         // Description
@@ -93,7 +93,6 @@
                 }
             },
             error: (request, status, error) => {
-                console.log("ERROROROR");
                 console.log(error, status, request);
             }
         });

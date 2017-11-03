@@ -42,9 +42,9 @@ router.route('/')
             name: req.body.name,
             description: req.body.description,
             comments: [],
-            contactInfo: req.body.contactInfo,
-            userPublisher: req.body.userPublisher,
-            userWorker: req.body.userWorker
+            email: req.body.email,
+            owner: req.body.owner,
+            worker: req.body.worker
         }, (err, project) => {
             if (err) {
                 res.statusCode = 400;

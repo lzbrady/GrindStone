@@ -13,15 +13,15 @@
 
 .wrapper {
     display: inline-block;
-    width: 60%;
+    width: 100%;
 }
 
-/*Top info - image and job info*/
 
 .project {
     overflow: hidden;
     background-color: aquamarine;
     margin-top: 20px;
+    margin-bottom: 20px;
     border: 3px solid #1A2930;
     padding: 20px;
     padding-top: 0px;
@@ -37,47 +37,8 @@
     padding-top: 0px;
 }
 
-#top-info {
-    height: 50%;
-    overflow: hidden;
-}
-
-#top-info img {
-    width: 60%;
-    float: left;
-}
-
-#job-info {
-    background-color: #015249;
-    color: #fff;
-    display: inline-block;
-    width: 35%;
-    vertical-align: top;
-    margin-top: 20px;
-}
-
-.job-info-btn {
-    margin: 0px;
-    text-align: center;
-    font-size: 1.25rem;
-    cursor: pointer;
-}
-
-.job-info-content {
-    display: none;
-}
-
-.job-info-content {
-    /* padding: 6%; */
-    background-color: #57bc90;
-}
-
 hr {
     margin: 0px;
-}
-
-.description {
-    margin: auto;
 }
 
 
