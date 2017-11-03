@@ -9,7 +9,7 @@ $(document).ready(function () {
             $(this).next().hide();
         } else {
             //Hide the rest of them
-            let contents = $('.job-info-content');
+            const contents = $('.job-info-content');
             for (let i = 0; i < contents.length; i++) {
                 $(contents[i]).hide();
             }
@@ -19,8 +19,8 @@ $(document).ready(function () {
 
     function getComments() {
         let comments = $('.comments');
-        let handle = $('.comment-handle');
-        let oneComment = $('.comment');
+        const handle = $('.comment-handle');
+        const oneComment = $('.comment');
 
         handle.text('username');
         oneComment.text('This is the text of a comment. Phasellus convallis sit amet nisi ac cursus. Vestibulum sit amet ligula lacus. Integer faucibus augue ut tempor cursus. Proin tortor tortor, cursus quis porta ac, mollis non justo.')
@@ -28,7 +28,3 @@ $(document).ready(function () {
 
     getComments();
 });
-
-function loadMain() {  
-    window.location.href = "../main-page/main.html";
-}

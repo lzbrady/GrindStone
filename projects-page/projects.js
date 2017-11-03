@@ -20,33 +20,54 @@
             error: (request, status, error) => {
                 console.log("ERROR " + error);
             }
-        })
+        });
+    }
+
+    function getSingleProjectAndRedirect(project) {
+        let error = false;
+        try {
+            const projectToSave = JSON.stringify(project);
+            sessionStorage.setItem("singleProject", projectToSave);
+        } catch (e) {
+            error = true;
+        }
+        if (!error) {
+            window.location.href = './detail-project.html';
+        }
     }
 
     function createAddProjectForm() {
         $(".wrapper").empty();
         const container = $("#add-project-div").empty();
         const form = $('<form name="create-project-form">');
+
+        // Submit and cancel buttons
         const submitButton = $('<button id="create-project-btn" type="submit" class="table-cell"> Create Project </button>');
-        //Name
+        const cancelButton = $('<button id="cancel-create-btn" type="submit" class="table-cell"> Cancel </button>');
+
+        // Name
         form.append('<label for="name">Name</label>');
         form.append('<input required type="text" name="name" class="table-cell" placeholder="Project Name"> <br />');
-        //Description
+
+        // Description
         form.append('<label for="description">Description</label>');
         form.append('<input required type="text" name="description" class="table-cell" placeholder="Project Description"> <br />');
-        //Email
+
+        // Email
         form.append('<label for="email">Email</label>');
         form.append('<input type="text" name="email" class="table-cell" placeholder="name@email.com"> <br />');
-        //Image
-        form.append('<label for="image">Image</label>');
-        form.append('<input type="text" name="image" class="table-cell" placeholder="url goes here"> <br />');
 
+        form.append(cancelButton);
         form.append(submitButton);
         container.append(form);
         container.append('<div class="clear"></div>');
         submitButton.on('click', (event) => {
             event.preventDefault();
             createProject();
+        });
+        cancelButton.on('click', (event) => {
+            event.preventDefault();
+            window.location.href = 'projects.html';
         });
     }
 
@@ -55,12 +76,10 @@
             name: $('[name="name"]').val(),
             description: $('[name="description"]').val(),
             email: $('[name="email"]').val(),
-            imageURL: $('[name="image"]').val(),
             comment: [],
             owner: "Owner Name", //TODO: find user's name
             worker: null,
         };
-        console.log(projectObject);
         $.ajax({
             url: apiUrl,
             type: 'POST',
@@ -83,10 +102,11 @@
     function displayAllProjects(projects) {
         let currentProjectDiv;
         if (projects) {
-            currentProjectDiv = $("<div>").addClass("project");
             projects.forEach((project) => {
-                console.log("Project:");
-                console.log(project);
+                currentProjectDiv = $("<div>").addClass("project");
+                currentProjectDiv.on('click', () => {
+                    getSingleProjectAndRedirect(project);
+                });
                 let comments;
                 if (project.comment) {
                     comments = [];
@@ -97,23 +117,19 @@
                     comments = "No comments yet";
                 }
                 currentProjectDiv.append(
-                    '<div class="cover-image">' +
-                    '<img src="' + project.imageURL + '" alt="' + project.name + '"' +
-                    'width="200px">' +
-                    '</div>' +
-                    '<p>' + project.description + '</p>' +
+                    '<h1 class="project-name">' + project.name + '</h1>' +
                     '<div>' +
-                    '<h3>' + project.name + '</h3>' +
+                    '<p class="description">' + project.description + '</p>' +
                     '<p> Posted By: ' + project.owner + '</p>' +
-                    '<p>' + (project.worker || "Not claimed yet") + '</p>' +
-                    '</div>' +
-                    '<div class="clear"></div>'
+                    '<p> Claimed By: ' + (project.worker || "Not claimed yet") + '</p>' +
+                    '</div>'
                 );
+                $(".wrapper").append(currentProjectDiv);
             });
         } else {
-            currentProjectDiv.append('<div>No projects to display yet :(</div>');
+            currentProjectDiv = $("<div>").addClass("project");
+            currentProjectDiv.append('<p>No projects to display yet :(</p>');
         }
-        $(".wrapper").append(currentProjectDiv);
     }
 
     $(document).ready(() => {

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../template-style.css">
+    <link rel="stylesheet" href="detail-project-style.css">
+    <script src="../jquery-3.2.1.js"></script>
+    <script src="detail-project.js"></script>
+
+    <title>GrindStone | Job Detail</title>
+</head>
+
+<body>
+    <header>
+        <h1>GrindStone</h1>
+
+        <div class="top-right-header">
+            <a href="">Logout</a>
+            <a href="../user-page/my-account.html">My Account</a>
+        </div>
+
+        <nav class="nav">
+            <ul>
+                <li>
+                    <a id="home" href="../main-page/main.html">Home</a>
+                </li>
+                <li>
+                    <a id="jobs" href="../jobs-page/job.html">Jobs</a>
+                </li>
+                <li>
+                    <a id="projects" href="./projects.html">Projects</a>
+                </li>
+                <li>
+                    <a id="users" href="../user-page/user.html">Users</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Overall container-->
+    <div class="container">
+        <!--Image and application info at the top-->
+        <div id="top-info">
+            <div class="wrapper">
+                <!-- <img src="http://velare-media.com/wp/wp-content/uploads/2017/01/your-website.jpg" alt="Picture Not Available"> -->
+            </div>
+            <div id="job-info">
+                <!--How To Apply-->
+                <p class="job-info-btn">
+                    How To Apply
+                </p>
+                <div class="job-info-content">
+                    Email here
+                </div>
+
+                <hr>
+
+                <!--Deadline-->
+                <p class="job-info-btn">
+                    Deadline
+                </p>
+                <div class="job-info-content">
+                    Date here
+                </div>
+
+                <hr>
+
+                <!--Contact Information-->
+                <p class="job-info-btn">
+                    Contact Information
+                </p>
+                <div class="job-info-content">
+                    Phone
+                </div>
+            </div>
+        </div>
+
+        <!--Description-->
+        <div class="description">
+            <p id="description-text">
+                This is a description placeholder. Donec imperdiet venenatis massa, a ultricies mauris sodales ut. Duis nec porta nisi. Ut
+                viverra luctus lorem gravida pretium. Proin lacus eros, maximus sodales fermentum ut, finibus eget augue.
+                Nam vel interdum mauris. Phasellus quis turpis id ex interdum cursus. Phasellus commodo sit amet felis eu
+                faucibus. Donec gravida sit amet neque eget sagittis. Duis nec pretium tellus.
+            </p>
+        </div>
+
+        <!--Comment Section-->
+        <div class="comments">
+            <!--Heading-->
+            <p id="comments-heading">Comments</p>
+
+            <!--Handle-->
+            <div id="at">@</div>
+            <div class="comment-handle"></div>
+
+            <!--Contents of actual comment-->
+            <div class="comment"></div>
+
+            <!--Input to submit own comment-->
+            <div class="input-comment-container">
+                <button class="button" id="input-comment-btn">Comment</button>
+                <input class="input" id="input-comment" type="text">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

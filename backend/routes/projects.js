@@ -38,14 +38,10 @@ router.route('/')
     })
     //ADD a project
     .post((req, res) => {
-        console.log("TEST");
-        console.log(req.params);
-        console.log(req.body);
         PROJECT.create({
             name: req.body.name,
             description: req.body.description,
-            imageURL: req.body.imageURL,
-            comment: [],
+            comments: [],
             contactInfo: req.body.contactInfo,
             userPublisher: req.body.userPublisher,
             userWorker: req.body.userWorker
@@ -60,15 +56,22 @@ router.route('/')
         });
     });
 
-//Specific project
-// .get((req, res) => {
-//     PROJECT.find({}, (err, projects) => {
-//         if (err) {
-//             handleError(err, res, "No Projects Found", 404);
-//         } else {
-//             res.json(projects);
-//         }
-//     });
-// })
+router.route('/:projectId')
+    .get((req, res) => {
+        if(req.params && req.params.projectId) {
+            PROJECT.findById(req.params.projectId, (err, project) => {
+                if (err) {
+                    handleError(err, res, 'Not Found', 404);
+                } else {
+                    res.json(project);
+                }
+            });
+        } else {
+            handleError(new Error(), res, 'GET error, problem retrieving data', 404);
+        }
+    })
+    .delete((req, res) => {
+
+    });
 
 module.exports = router;

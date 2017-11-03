@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 const jobsSchema = new mongoose.Schema({
     name: String,
     description: String,
-    comment: [String],
+    comments: [String],
     contactInfo: String,
     userPublisher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     userWorkers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
