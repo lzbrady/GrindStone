@@ -65,7 +65,7 @@ hr {
     text-decoration: underline;
 }
 
-.comments {
+.comments-container {
     background-color: bisque;
     padding: 10px;
 }
@@ -83,6 +83,7 @@ hr {
     margin: auto;
     margin-top: 20px;
     padding: 5px;
+    background-color: bisque;
 }
 
 #input-comment {

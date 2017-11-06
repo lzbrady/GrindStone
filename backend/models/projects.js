@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const projectsSchema = new mongoose.Schema({
     name: String,
     description: String,
-    comments: [String],
+    comments: [],
     email: String,
     owner: String,
     worker: String

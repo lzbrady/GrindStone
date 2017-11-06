@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
 
 const app = express();
 
@@ -11,7 +12,8 @@ const dbURI = 'mongodb://localhost/grindstonedb';
 
 require("./models/projects");
 require("./models/jobs");
-// require("./models/users");
+require("./models/users");
+require('./config/passport');
 
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
@@ -34,6 +36,8 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 app.use(logger('dev'));
+
+app.use(passport.initialize());
 
 app.use('/projects', projectRoute);
 app.use('/jobs', jobsRoute);

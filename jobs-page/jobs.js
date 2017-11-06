@@ -53,17 +53,21 @@
         form.append('<label for="description">Description</label>');
         form.append('<input required type="text" name="description" class="table-cell" placeholder="Job Description"> <br />');
 
+        // Deadline
+        form.append('<label for="description">Deadline</label>');
+        form.append('<input required type="text" name="deadline" class="table-cell" placeholder="When do you hope to have the job done by?"> <br />');
+
         // Email
         form.append('<label for="email">Email</label>');
         form.append('<input type="text" name="email" class="table-cell" placeholder="name@email.com"> <br />');
 
         // Website
         form.append('<label for="email">Website</label>');
-        form.append('<input type="text" name="email" class="table-cell" placeholder="www.grindstone.com"> <br />');
+        form.append('<input type="text" name="website" class="table-cell" placeholder="www.grindstone.com"> <br />');
 
         // Phone
         form.append('<label for="email">Phone Number</label>');
-        form.append('<input type="text" name="email" class="table-cell" placeholder="(123) 456-7890"> <br />');
+        form.append('<input type="text" name="phone" class="table-cell" placeholder="(123) 456-7890"> <br />');
 
         form.append(cancelButton);
         form.append(submitButton);
@@ -83,7 +87,10 @@
         const jobObject = {
             name: $('[name="name"]').val(),
             description: $('[name="description"]').val(),
+            deadline: $('[name="deadline"]').val(),
             email: $('[name="email"]').val(),
+            website: $('[name="website"]').val(),
+            phone: $('[name="phone"]').val(),
             comment: [],
             owner: "Owner Name", //TODO: find user's name
             worker: null,

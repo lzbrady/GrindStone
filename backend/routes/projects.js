@@ -5,6 +5,12 @@ const express = require('express'),
     methodOverride = require('method-override'); // used to manipulate POST data
 const PROJECT = mongoose.model('Project');
 
+const jwt = require('express-jwt');
+const auth = jwt({
+    secret: 'Temp_Secret',
+    userProperty: 'payload'
+});
+
 router.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -22,6 +28,21 @@ function handleError(err, res, msg, statusCode) {
     err.message = msg;
     res.json({
         message: err.status + ' ' + err
+    });
+}
+
+function makeComment(req, res, project) {
+    const comment = {
+        comment: req.body.comment,
+        name: req.body.name  
+    };
+    project.comments.push(comment);
+    project.save((err, p) => {
+        if (err) {
+            handleError(err, res, 'Comment could not be handled');
+        } else {
+            res.json(p);
+        }
     });
 }
 
@@ -58,7 +79,7 @@ router.route('/')
 
 router.route('/:projectId')
     .get((req, res) => {
-        if(req.params && req.params.projectId) {
+        if (req.params && req.params.projectId) {
             PROJECT.findById(req.params.projectId, (err, project) => {
                 if (err) {
                     handleError(err, res, 'Not Found', 404);
@@ -68,6 +89,19 @@ router.route('/:projectId')
             });
         } else {
             handleError(new Error(), res, 'GET error, problem retrieving data', 404);
+        }
+    })
+    .post((req, res) => {
+        if (req.params && req.params.projectId) {
+            PROJECT.findById(req.params.projectId, (err, project) => {
+                if (err) {
+                    handleError(err, res, 'Project not found', 404);
+                } else {
+                    makeComment(req, res, project);
+                }
+            });
+        } else {
+            handleError({}, res, 'GET error, problem retrieving data', 404);
         }
     })
     .delete((req, res) => {

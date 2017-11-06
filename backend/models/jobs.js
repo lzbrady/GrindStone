@@ -5,7 +5,8 @@ mongoose.Promise = global.Promise;
 const jobsSchema = new mongoose.Schema({
     name: String,
     description: String,
-    comments: [String],
+    deadline: Date,
+    comments: [],
     email: String,
     website: String,
     phone: String,

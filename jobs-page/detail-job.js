@@ -57,6 +57,10 @@
         );
         $(".wrapper").append(currentJobDiv);
         setHeights();
+
+        $('#email').text(job.email);
+        $('#deadline').text(job.deadline || "No Deadline Specified");
+        $('#phone').text(job.phone || "No Phone Number Given");
     }
 
     function setHeights() {

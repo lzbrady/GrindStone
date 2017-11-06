@@ -41,6 +41,7 @@ router.route('/')
         JOB.create({
             name: req.body.name,
             description: req.body.description,
+            deadline: req.body.deadline,
             comments: [],
             email: req.body.email,
             website: req.body.website,

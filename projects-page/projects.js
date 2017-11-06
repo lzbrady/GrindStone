@@ -76,7 +76,7 @@
             name: $('[name="name"]').val(),
             description: $('[name="description"]').val(),
             email: $('[name="email"]').val(),
-            comment: [],
+            comments: [],
             owner: "Owner Name", //TODO: find user's name
             worker: null,
         };
@@ -97,7 +97,7 @@
             }
         });
     }
-
+    
     function displayAllProjects(projects) {
         let currentProjectDiv;
         if (projects) {
@@ -106,15 +106,15 @@
                 currentProjectDiv.on('click', () => {
                     getSingleProjectAndRedirect(project);
                 });
-                let comments;
-                if (project.comment) {
-                    comments = [];
-                    project.comment.forEach((comment) => {
-                        comments.push(comment);
-                    });
-                } else {
-                    comments = "No comments yet";
-                }
+                // let comments;
+                // if (project.comment) {
+                //     comments = [];
+                //     project.comment.forEach((comment) => {
+                //         comments.push(comment);
+                //     });
+                // } else {
+                //     comments = "No comments yet";
+                // }
                 currentProjectDiv.append(
                     '<h1 class="project-name">' + project.name + '</h1>' +
                     '<div>' +
