@@ -59,6 +59,7 @@ router.route('/')
     })
     //ADD a project
     .post((req, res) => {
+        console.log(req.body);
         PROJECT.create({
             name: req.body.name,
             description: req.body.description,

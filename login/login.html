@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="login-style.css">
     <link rel="stylesheet" href="../template-style.css">
 
+    <script src="../jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="login.js"></script>
+
     <title>GrindStone | Login</title>
 </head>
 
@@ -30,21 +33,14 @@
 
                 <tr>
                     <td>
-                        <input id="username-input" type="text">
+                        <input id="username-input" type="text" name="username-login">
                     </td>
                     <td>
-                        <input id="password-input" type="password">
+                        <input id="password-input" type="password" name="password-login">
                     </td>
                     <td>
-                        <button>Login</button>
+                        <button id="login-btn">Login</button>
                     </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <a href="">Forgot Password</a>
-                    </td>
-                    <td></td>
                 </tr>
             </table>
         </div>
@@ -56,42 +52,37 @@
         </div>
 
         <div class="register">
-            <p>Sign Up Free!</p>
-            <!--First Name-->
-            <div id="first-name" class="register-input">
-                <input type="text" placeholder="First Name">
-            </div>
+            <p id="sign-up-free">Sign Up Free!</p>
 
-            <!--Last Name-->
-            <div id="last-name" class="register-input">
-                <input type="text" placeholder="Last Name">
-            </div>
+            <p class="error" id="username-error">Username Taken</p>
 
             <!--Username-->
             <div id="username" class="register-input">
-                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Username" name="username">
             </div>
 
             <br>
 
+            <p class="error" id="password-error">Passwords Do Not Match</p>
+
             <!--Password-->
             <div id="password" class="register-input">
-                <input type="text" placeholder="Passsword">
+                <input type="password" placeholder="Passsword" name="password">
             </div>
 
             <!--Confirm Password-->
             <div id="confirm" class="register-input">
-                <input type="text" placeholder="Confirm Password">
+                <input type="password" placeholder="Confirm Password" name="confirm">
             </div>
 
             <br>
 
             <!--Email-->
             <div id="email" class="register-input">
-                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Email" name="email">
             </div>
 
-            <button class="sign-up">Sign Up</button>
+            <button class="register-btn">Create Account</button>
         </div>
     </div>
 </body>
