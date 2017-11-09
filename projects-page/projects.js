@@ -71,6 +71,11 @@
         });
     }
 
+    function loadMyAccount() {
+        sessionStorage.setItem("isMyAccount", "true");
+        window.location.href = "../user-page/my-account.html";
+    }
+
     function createProject() {
         const projectObject = {
             name: $('[name="name"]').val(),
@@ -129,6 +134,10 @@
             currentProjectDiv = $("<div>").addClass("project");
             currentProjectDiv.append('<p>No projects to display yet :(</p>');
         }
+        $('#myAccount').click((event) => {
+            event.preventDefault();
+            loadMyAccount();
+        });
     }
 
     $(document).ready(() => {

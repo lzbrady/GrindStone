@@ -90,6 +90,15 @@
         });
 
         displayComments();
+        $('#myAccount').click((event) => {
+            event.preventDefault();
+            loadMyAccount();
+        });
+    }
+
+    function loadMyAccount() {
+        sessionStorage.setItem("isMyAccount", "true");
+        window.location.href="../user-page/my-account.html";
     }
 
     function setHeights() {

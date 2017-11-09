@@ -203,7 +203,10 @@ app.use('/users', userRoute);
 
 // Get a user
 app.get('/profile/:username', (req, res) => {
-    if (req.params.username) {
+    console.log(req.query);
+    if (req.query.isMyAccount && req.query.isMyAccount === "true") {
+        res.json(thisUser);
+    } else if (req.params.username) {
         USER.findOne({
             'username': req.params.username
         }, (err, user) => {
@@ -269,14 +272,12 @@ function addReview(req, res) {
 app.post('/profile/:username', (req, res) => {
     if (req.params && req.params.username) {
         if (thisUser) {
-            console.log(req.body);
             if (req.body.skill) {
                 addSkill(req, res);
             } else if (req.body.rating && req.body.description) {
                 addReview(req, res);
             } else {
-                console.log("Users Found!");
-                res.json(users);
+                res.json("Action could not be performed");
             }
         } else {
             res.json("Action could not be performed");

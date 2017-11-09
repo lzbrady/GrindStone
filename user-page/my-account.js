@@ -1,10 +1,22 @@
 (function () {
     "use strict";
     const apiUrl = "http://localhost:3000/profile/";
-    let thisUser = {};
+    let thisUser = {},
+        isMyAccount = {};
 
     function loadUser() {
         let userString, error = false;
+
+        try {
+            isMyAccount = {
+                isMyAccount: sessionStorage.getItem("isMyAccount")
+            };
+        } catch (e) {
+            isMyAccount = {
+                isMyAccount: "true"
+            };
+        }
+
         try {
             userString = sessionStorage.getItem("singleUser");
         } catch (e) {
@@ -18,10 +30,12 @@
     }
 
     function getUser() {
+        console.log(isMyAccount);
         $.ajax({
             url: apiUrl + thisUser.username,
             type: "GET",
             dataType: "JSON",
+            data: isMyAccount,
             success: (data) => {
                 if (data) {
                     thisUser = data;
@@ -108,6 +122,7 @@
     }
 
     function displayUser() {
+        console.log(thisUser);
         if (thisUser.username) {
             $('.container').empty();
 
@@ -152,6 +167,15 @@
             event.preventDefault();
             addReview();
         });
+        $('#myAccount').click((event) => {
+            event.preventDefault();
+            loadMyAccount();
+        });
+    }
+
+    function loadMyAccount() {
+        sessionStorage.setItem("isMyAccount", "true");
+        window.location.href = "../user-page/my-account.html";
     }
 
     $(document).ready(function () {

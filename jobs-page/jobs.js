@@ -151,6 +151,15 @@
             currentJobDiv = $("<div>").addClass("job");
             currentJobDiv.append('<p>No jobs to display yet :(</p>');
         }
+        $('#myAccount').click((event) => {
+            event.preventDefault();
+            loadMyAccount();
+        });
+    }
+
+    function loadMyAccount() {
+        sessionStorage.setItem("isMyAccount", "true");
+        window.location.href = "../user-page/my-account.html";
     }
 
     $(document).ready(() => {

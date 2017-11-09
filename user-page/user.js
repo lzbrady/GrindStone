@@ -33,14 +33,16 @@
 
     function getSingleUserAndRedirect(user) {
         let error = false;
+        console.log(user);
         try {
             const userToSave = JSON.stringify(user);
             sessionStorage.setItem("singleUser", userToSave);
+            sessionStorage.setItem("isMyAccount", "false");
         } catch (e) {
             error = true;
         }
         if (!error) {
-            window.location.href = './my-account.html';
+            window.location.href = 'my-account.html';
         }
     }
 
@@ -105,7 +107,7 @@
     //         }
     //     });
     // }
-    
+
     function displayAllUsers(users) {
         let currentUserDiv;
         if (users) {
@@ -129,23 +131,23 @@
                     // '<div>' +
                     // '<p class="email">' + user.email + '</p>' +
                     // '</div>'
-                    '<li class="user-card">' + 
+                    '<li class="user-card">' +
                     '<!-- link to user detail page -->' +
                     '<a href="">' +
-                        '<!-- picture -->' +
-                        '<img class="user-image" src="../images/user-icon-image-placeholder.jpg" alt="">' + 
+                    '<!-- picture -->' +
+                    '<img class="user-image" src="../images/user-icon-image-placeholder.jpg" alt="">' +
                     '</a>' +
                     '<div class="user-detail">' +
-                        '<!-- link to user detail page -->' +
-                        '<a href="">' + user.username + '</a>' +
-                        '<!-- user email -->' +
-                        '<p class="user-email">' + user.email + '</p>' +
+                    '<!-- link to user detail page -->' +
+                    '<p>' + user.username + '</p>' +
+                    '<!-- user email -->' +
+                    '<p class="user-email">' + user.email + '</p>' +
                     '</div>' +
                     '<div class="user-stats">' +
-                        '<p>Projects: </p>' +
-                        '<strong>12</strong>' +
-                        '<p>Follers: </p>' +
-                        '<strong>100</strong>' +
+                    '<p>Projects: </p>' +
+                    '<strong>12</strong>' +
+                    '<p>Follers: </p>' +
+                    '<strong>100</strong>' +
                     '</div>' +
                     '</li>'
                 );
@@ -155,6 +157,15 @@
             currentUserDiv = $("<div>").addClass("user");
             currentUserDiv.append('<p>No users to display yet :(</p>');
         }
+        $('#myAccount').click((event) => {
+            event.preventDefault();
+            loadMyAccount();
+        });
+    }
+
+    function loadMyAccount() {
+        sessionStorage.setItem("isMyAccount", "true");
+        window.location.href = "../user-page/my-account.html";
     }
 
     $(document).ready(() => {

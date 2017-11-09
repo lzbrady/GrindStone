@@ -46,7 +46,9 @@
         let error = false;
         try {
             const userToSave = JSON.stringify(user);
+            console.log(userToSave);
             sessionStorage.setItem("singleUser", userToSave);
+            sessionStorage.setItem("isMyAccount", "true");
         } catch (e) {
             error = true;
         }
