@@ -47,6 +47,14 @@ mongoose.connect(dbURI, {
     }
 });
 
+/*  Error handling function.  Invoke with error information. */
+function handleError(err, res, msg, statusCode) {
+    res.status(statusCode);
+    err.status = statusCode;
+    err.message = `${err.status}, ${msg}. ${err.message}`;
+    res.json(err);
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -218,6 +226,7 @@ router.route('/user')
             if (err) {
                 handleError(err, res, 'Users Not Found', 404);
             } else {
+                console.log("Users Found!");
                 res.json(users);
             }
         });
