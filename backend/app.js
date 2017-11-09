@@ -48,6 +48,14 @@ mongoose.connect(dbURI, {
     }
 });
 
+/*  Error handling function.  Invoke with error information. */
+function handleError(err, res, msg, statusCode) {
+    res.status(statusCode);
+    err.status = statusCode;
+    err.message = `${err.status}, ${msg}. ${err.message}`;
+    res.json(err);
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -267,7 +275,8 @@ app.post('/profile/:username', (req, res) => {
             } else if (req.body.rating && req.body.description) {
                 addReview(req, res);
             } else {
-                res.json("Action could not be performed");
+                console.log("Users Found!");
+                res.json(users);
             }
         } else {
             res.json("Action could not be performed");

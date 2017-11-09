@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    const apiUrl = "http://localhost:3000/user/";
+    const apiUrl = "http://localhost:3000/users/";
     let allUsers;
 
     // For testing
