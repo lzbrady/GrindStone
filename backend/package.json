@@ -4,7 +4,7 @@
   "description": "GrindStone connects people who need software done to amateur developers, and allows amateur developers to have their work reviewed.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
