@@ -76,11 +76,10 @@ tr td {
 .skills {
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 2;
+    grid-row-start: 1;
     grid-row-end: 2;
     background-color: #77c9d4;
     padding-left: 10px;
-    height: fit-content;
     width: 75%;
     margin: auto;
     box-sizing: border-box;

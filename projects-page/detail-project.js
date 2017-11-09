@@ -120,24 +120,6 @@
     }
 
     $(document).ready(function () {
-        //Display first job info div on start
-        $($('.job-info-content')[0]).show();
-
-        //Toggling job info divs
-        $('.job-info-btn').click(function () {
-            //First check to see if clicking on already displayed element, if so close it and don't display anythign else
-            if (this.nextElementSibling.style.display == 'block') {
-                $(this).next().hide();
-            } else {
-                //Hide the rest of them
-                const contents = $('.job-info-content');
-                for (let i = 0; i < contents.length; i++) {
-                    $(contents[i]).hide();
-                }
-                $(this).next().show();
-            }
-        });
-
         loadProject();
     });
 })();

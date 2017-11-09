@@ -124,9 +124,9 @@ app.post('/register', (req, res) => {
                             username: req.body.username,
                             email: req.body.email,
                             hash: hash,
+                            bio: "No Bio Yet",
                             skillList: [],
-                            projectList: [],
-                            jobList: []
+                            reviews: []
                         };
 
                         USER.create(userData, (err, user) => {
@@ -144,8 +144,6 @@ app.post('/register', (req, res) => {
 });
 
 app.use(function (req, res, next) {
-    console.log(req);
-
     if (token) {
         jwt.verify(token, 'secret', function (err, decoded) {
             if (err) {
