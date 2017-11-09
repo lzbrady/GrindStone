@@ -10,10 +10,12 @@ const app = express();
 
 
 const router = express.Router();
-const methodOverride = require('method-override');  // used to manipulate POST data
+const methodOverride = require('method-override'); // used to manipulate POST data
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(methodOverride( (req) => {
+router.use(bodyParser.urlencoded({
+    extended: true
+}));
+router.use(methodOverride((req) => {
     if (req.body && typeof req.body == 'object' && '_method' in req.body) {
         const method = req.body._method;
         delete req.body._method;
@@ -33,11 +35,12 @@ require("./models/jobs");
 require("./models/users");
 
 const USER = mongoose.model('User');
+let thisUser = {};
 
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
 const userRoute = require('./routes/user');
-const myAccountRoute = require('./routes/my-account');
+// const myAccountRoute = require('./routes/my-account');
 
 mongoose.connect(dbURI, {
     useMongoClient: true
@@ -49,6 +52,14 @@ mongoose.connect(dbURI, {
     }
 });
 
+/*  Error handling function.  Invoke with error information. */
+function handleError(err, res, msg, statusCode) {
+    res.status(statusCode);
+    err.status = statusCode;
+    err.message = `${err.status}, ${msg}. ${err.message}`;
+    res.json(err);
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -59,6 +70,8 @@ app.use(logger('dev'));
 
 
 let token;
+const LocalStorage = require('node-localstorage').LocalStorage;
+const localStore = new LocalStorage('./scratch');
 
 // Log in a user
 app.post('/login', (req, res) => {
@@ -70,19 +83,21 @@ app.post('/login', (req, res) => {
             if (err) {
                 res.json(err);
             } else if (user) {
+                thisUser = user;
                 bcrypt.compare(req.body.password, user.hash, (err, resp) => {
                     if (resp) {
                         const payload = {
                             username: user.username
                         };
                         token = jwt.sign(payload, 'secret', {
-                            expiresIn: 60
+                            expiresIn: 86400
                         });
 
                         res.json({
                             success: true,
                             message: "Authentication successful.",
-                            token: token
+                            token: token,
+                            user: user
                         });
                     } else {
                         res.json({
@@ -110,6 +125,7 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
     if (req && req.username) {
         token = null;
+        thisUser = null;
         res.json('Logged out');
     }
 });
@@ -137,7 +153,7 @@ app.post('/register', (req, res) => {
                         res.json("Unable to create user");
                     } else {
                         console.log(hash);
-                        const userData = {
+                        thisUser = {
                             username: req.body.username,
                             email: req.body.email,
                             hash: hash,
@@ -146,7 +162,7 @@ app.post('/register', (req, res) => {
                             reviews: []
                         };
 
-                        USER.create(userData, (err, user) => {
+                        USER.create(thisUser, (err, user) => {
                             if (err) {
                                 res.json(err);
                             } else {
@@ -160,6 +176,7 @@ app.post('/register', (req, res) => {
     }
 });
 
+// Security
 app.use(function (req, res, next) {
     if (token) {
         jwt.verify(token, 'secret', function (err, decoded) {
@@ -186,23 +203,94 @@ app.use(function (req, res, next) {
 app.use('/projects', projectRoute);
 app.use('/jobs', jobsRoute);
 app.use('/users', userRoute);
-app.use('/profile', myAccountRoute);
+// app.use('/profile', myAccountRoute);
+
+// Get a user
+app.get('/profile/:username', (req, res) => {
+    if (req.params.username) {
+        USER.findOne({
+            'username': req.params.username
+        }, (err, user) => {
+            if (user) {
+                res.json({
+                    username: user.username,
+                    email: user.email,
+                    bio: user.bio,
+                    reviews: user.reviews,
+                    skillList: user.skillList
+                });
+            } else {
+                res.json(err);
+            }
+        });
+    } else {
+        res.json("Not logged in");
+    }
+});
+
+// Add a skill
+function addSkill(req, res) {
+    thisUser.skillList.push(req.body.skill);
+    thisUser.save((err, u) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({
+                username: thisUser.username,
+                email: thisUser.email,
+                bio: thisUser.bio,
+                reviews: thisUser.reviews,
+                skillList: thisUser.skillList
+            });
+        }
+    });
+}
+
+// Add a review
+function addReview(req, res) {
+    const review = {
+        rating: req.body.rating,
+        description: req.body.description,
+        reviewer: thisUser.username
+    };
+    thisUser.reviews.push(review);
+    thisUser.save((err, u) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({
+                username: thisUser.username,
+                email: thisUser.email,
+                bio: thisUser.bio,
+                reviews: thisUser.reviews,
+                skillList: thisUser.skillList
+            });
+        }
+    });
+}
+
+// Post a comment or review
+app.post('/profile/:username', (req, res) => {
+    if (req.params && req.params.username) {
+        if (thisUser) {
+            console.log(req.body);
+            if (req.body.skill) {
+                addSkill(req, res);
+            } else if (req.body.rating && req.body.description) {
+                addReview(req, res);
+            } else {
+                console.log("Users Found!");
+                res.json(users);
+            }
+        } else {
+            res.json("Action could not be performed");
+        }
+    }
+});
 
 app.listen(port, function () {
     console.log(`Listening on port number ${port}.`);
 });
 
-router.route('/user')
-
-    // GET all users
-    .get( (req, res) => {
-        USER.find({},  (err, users) => {
-            if (err) {
-                handleError(err, res, 'Users Not Found', 404);
-            } else {
-                res.json(users);
-            }
-        });
-    });
 
 module.exports = app;

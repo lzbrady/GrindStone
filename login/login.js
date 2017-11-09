@@ -42,6 +42,19 @@
         }
     }
 
+    function getSingleUserAndRedirect(user) {
+        let error = false;
+        try {
+            const userToSave = JSON.stringify(user);
+            sessionStorage.setItem("singleUser", userToSave);
+        } catch (e) {
+            error = true;
+        }
+        if (!error) {
+            window.location.href = '../user-page/my-account.html';
+        }
+    }
+
     function login(u) {
         $('#invalid-cred').hide();
         const user = u || {
@@ -56,7 +69,7 @@
             data: user,
             success: (data) => {
                 if (data && data.success) {
-                    window.location.href = '../user-page/my-account.html';
+                    getSingleUserAndRedirect(data.user);
                 } else {
                     console.log("No match");
                     $('#invalid-cred').show();

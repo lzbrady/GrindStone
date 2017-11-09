@@ -99,9 +99,17 @@
     }
 
     function displayAllProjects(projects) {
-        let currentProjectDiv;
-        if (projects) {
-            projects.forEach((project) => {
+        let currentProjectDiv, areProjects = true;
+
+        if (projects.message) {
+            if (!projects.success) {
+                areProjects = false;
+                console.log(projects);
+            }
+        }
+
+        if (projects && areProjects) {
+            projects.reverse().forEach((project) => {
                 currentProjectDiv = $("<div>").addClass("project");
                 currentProjectDiv.on('click', () => {
                     getSingleProjectAndRedirect(project);
