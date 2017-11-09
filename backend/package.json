@@ -11,6 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/lzbrady/GrindStone.git"
   },
+  "engines": {
+    "node": "~8.6.0",
+    "npm": "5.3.0"
+  },  
   "author": "",
   "license": "ISC",
   "bugs": {
