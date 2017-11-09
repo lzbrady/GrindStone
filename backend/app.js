@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 // const passport = require('passport');
 // const session = require('express-session');
 // const localStrategy = require('passport-local').Strategy;
@@ -17,9 +19,11 @@ require("./models/projects");
 require("./models/jobs");
 require("./models/users");
 
+const USER = mongoose.model('User');
+
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
-const authRoute = require('./routes/index');
+// const authRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 
 mongoose.connect(dbURI, {
@@ -40,13 +44,101 @@ app.use(cors());
 
 app.use(logger('dev'));
 
-app.use('/', authRoute);
+// app.use('/', authRoute);
 
-app.use(function(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers.token['x-access-token'];
+let token;
+
+// Log in a user
+app.post('/login', (req, res) => {
+    if (req.body.username &&
+        req.body.password) {
+        USER.findOne({
+            username: req.body.username
+        }, (err, user) => {
+            if (err) {
+                res.json(err);
+            } else {
+                bcrypt.compare(req.body.password, user.hash, (err, resp) => {
+                    if (resp) {
+                        const payload = {
+                            username: user.username
+                        };
+                        token = jwt.sign(payload, 'secret', {
+                            expiresIn: "1h"
+                        });
+
+                        res.json({
+                            success: true,
+                            message: "Authentication successful.",
+                            token: token
+                        });
+                    } else {
+                        res.json({
+                            sucess: false,
+                            message: "Authentication failed."
+                        });
+                    }
+                });
+            }
+        });
+    } else {
+        res.json("User not found");
+    }
+});
+
+// Register a user
+app.post('/register', (req, res) => {
+    if (req.body.username &&
+        req.body.email &&
+        req.body.password) {
+        USER.findOne({
+            'email': req.body.email
+        }, (err, user) => {
+            if (user) {
+                res.json("Email taken");
+            }
+        });
+        USER.findOne({
+            'username': req.body.username
+        }, (err, user) => {
+            if (user) {
+                res.json("Username Taken");
+            } else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    if (err) {
+                        res.json("Unable to create user");
+                    } else {
+                        console.log(hash);
+                        const userData = {
+                            username: req.body.username,
+                            email: req.body.email,
+                            hash: hash,
+                            skillList: [],
+                            projectList: [],
+                            jobList: []
+                        };
+
+                        USER.create(userData, (err, user) => {
+                            if (err) {
+                                res.json(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+});
+
+
+
+app.use(function (req, res, next) {
+    console.log(req);
 
     if (token) {
-        jwt.verify(token, 'secret', function(err, decoded) {
+        jwt.verify(token, 'secret', function (err, decoded) {
             if (err) {
                 res.json({
                     success: false,

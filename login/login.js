@@ -25,8 +25,13 @@
                         $('#username-error').show();
                     } else if (data == "Email taken") {
                         $('#email-error').show();
+                    } else {
+                        const user = {
+                            username: $('[name="username"]').val(),
+                            password: pass
+                        };
+                        login(user);
                     }
-                    console.log(data);
                 },
                 error: (request, status, error) => {
                     console.log("ERROR");
@@ -37,8 +42,8 @@
         }
     }
 
-    function login() {
-        const user = {
+    function login(u) {
+        const user = u || {
             username: $('[name="username-login"]').val(),
             password: $('[name="password-login"]').val()
         };
@@ -50,7 +55,7 @@
             data: user,
             success: (data) => {
                 if (data) {
-                    console.log(data);
+                    window.location.href = '../user-page/my-account.html';
                 } else {
                     console.log("No match");
                 }
