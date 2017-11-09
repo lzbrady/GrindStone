@@ -25,6 +25,21 @@ function handleError(err, res, msg, statusCode) {
     });
 }
 
+function makeComment(req, res, job) {
+    const comment = {
+        comment: req.body.comment,
+        name: req.body.name
+    };
+    job.comments.push(comment);
+    job.save((err, j) => {
+        if (err) {
+            handleError(err, res, 'Comment could not be handled');
+        } else {
+            res.json(j);
+        }
+    });
+}
+
 router.route('/')
     //GET all jobs
     .get((req, res) => {
@@ -71,6 +86,19 @@ router.route('/:jobId')
             });
         } else {
             handleError(new Error(), res, 'GET error, problem retrieving data', 404);
+        }
+    })
+    .post((req, res) => {
+        if (req.params && req.params.jobId) {
+            JOB.findById(req.params.jobId, (err, job) => {
+                if (err) {
+                    handleError(err, res, 'Project not found', 404);
+                } else {
+                    makeComment(req, res, job);
+                }
+            });
+        } else {
+            handleError({}, res, 'GET error, problem retrieving data', 404);
         }
     })
     .delete((req, res) => {

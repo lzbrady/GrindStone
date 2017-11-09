@@ -61,6 +61,39 @@
         $('#email').text(job.email);
         $('#deadline').text(job.deadline || "No Deadline Specified");
         $('#phone').text(job.phone || "No Phone Number Given");
+
+        // Comment handler
+        $('#input-comment-btn').click((e) => {
+            e.preventDefault();
+            comment();
+        });
+
+        displayComments();
+    }
+
+    function comment() {
+        const comment = {
+            name: 'Temp-Name',
+            comment: $('[name="comment"]').val()
+        };
+        $.ajax({
+            url: apiUrl + job._id,
+            type: "POST",
+            data: comment,
+            dataType: "JSON",
+            success: (data) => {
+                if (data) {
+                    console.log(data);
+                    job = data;
+                    displayComments();
+                } else {
+                    console.log("Could not post comment");
+                }
+            },
+            error: (request, status, error) => {
+                console.log(error, status, request);
+            }
+        });
     }
 
     function setHeights() {
@@ -72,13 +105,26 @@
         );
     }
 
-    function getComments() {
-        let comments = $('.comments');
-        const handle = $('.comment-handle');
-        const oneComment = $('.comment');
-
-        handle.text('username');
-        oneComment.text('This is the text of a comment. Phasellus convallis sit amet nisi ac cursus. Vestibulum sit amet ligula lacus. Integer faucibus augue ut tempor cursus. Proin tortor tortor, cursus quis porta ac, mollis non justo.')
+    function displayComments() {
+        $('#input-comment').val('');
+        $('.comments').empty();
+        let length = 0;
+        if (job.comments) {
+            length = job.comments.length;
+        }
+        for (let i = 0; i < length; i++) {
+            const comment = job.comments[i];
+            const oneComment = $('<div>');
+            oneComment.append(
+                '<div id="at">@</div>' +
+                '<div class="comment-handle">' + comment.name + '</div>' +
+                '<div class="comment">' + comment.comment + '</div>'
+            );
+            $('.comments').append(oneComment);
+        }
+        if (length == 0) {
+            $('.comments').append('<p>No Comments Yet</p>');
+        }
     }
 
     $(document).ready(function () {

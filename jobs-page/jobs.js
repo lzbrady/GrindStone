@@ -114,8 +114,15 @@
     }
 
     function displayAllJobs(jobs) {
-        let currentJobDiv;
-        if (jobs) {
+        let currentJobDiv, areJobs = true;
+        if (jobs.message) {
+            if (!jobs.success) {
+                areJobs = false;
+                console.log(jobs);
+            }
+        }
+        if (jobs && areJobs) {
+            console.log(jobs);
             jobs.forEach((job) => {
                 currentJobDiv = $("<div>").addClass("job");
                 currentJobDiv.on('click', () => {

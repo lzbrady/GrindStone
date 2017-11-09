@@ -10,10 +10,12 @@ const app = express();
 
 
 const router = express.Router();
-const methodOverride = require('method-override');  // used to manipulate POST data
+const methodOverride = require('method-override'); // used to manipulate POST data
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(methodOverride( (req) => {
+router.use(bodyParser.urlencoded({
+    extended: true
+}));
+router.use(methodOverride((req) => {
     if (req.body && typeof req.body == 'object' && '_method' in req.body) {
         const method = req.body._method;
         delete req.body._method;
@@ -55,6 +57,8 @@ app.use(logger('dev'));
 
 
 let token;
+const LocalStorage = require('node-localstorage').LocalStorage;
+const localStore = new LocalStorage('./scratch');
 
 // Log in a user
 app.post('/login', (req, res) => {
@@ -74,6 +78,9 @@ app.post('/login', (req, res) => {
                         token = jwt.sign(payload, 'secret', {
                             expiresIn: 60
                         });
+
+
+                        localStore.setItem("token", token);
 
                         res.json({
                             success: true,
@@ -157,7 +164,22 @@ app.post('/register', (req, res) => {
 });
 
 app.use(function (req, res, next) {
+    console.log("Token");
+    console.log(token);
     if (token) {
+        jwt.verify(token, 'secret', function (err, decoded) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: 'Failed to authenticate'
+                });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else if (localStore && localStore.getItem("token")) {
+        token = localStore.getItem("token");
         jwt.verify(token, 'secret', function (err, decoded) {
             if (err) {
                 res.json({
@@ -191,8 +213,8 @@ app.listen(port, function () {
 router.route('/user')
 
     // GET all users
-    .get( (req, res) => {
-        USER.find({},  (err, users) => {
+    .get((req, res) => {
+        USER.find({}, (err, users) => {
             if (err) {
                 handleError(err, res, 'Users Not Found', 404);
             } else {

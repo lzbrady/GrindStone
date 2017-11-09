@@ -104,7 +104,11 @@
     function displayComments() {
         $('#input-comment').val('');
         $('.comments').empty();
-        for(let i = 0; i < project.comments.length; i++) {
+        let length = 0;
+        if (project.comments) {
+            length = project.comments.length;
+        }
+        for(let i = 0; i < length; i++) {
             const comment = project.comments[i];
             const oneComment = $('<div>');
             oneComment.append(
@@ -114,7 +118,7 @@
             );
             $('.comments').append(oneComment);
         }
-        if (project.comments.length == 0) {
+        if (length == 0) {
             $('.comments').append('<p>No Comments Yet</p>');
         }
     }

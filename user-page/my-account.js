@@ -4,15 +4,15 @@
     let thisUser = {};
 
     function loadUser() {
-        let projectString, error = false;
+        let userString, error = false;
         try {
-            projectString = sessionStorage.getItem("singleProject");
+            userString = sessionStorage.getItem("singleUSer");
         } catch (e) {
             error = true;
-            window.location = "projects.html";
+            window.location = "../login/login.html";
         }
         if (!error) {
-            thisUser._id = JSON.parse(projectString)._id;
+            thisUser._id = JSON.parse(userString)._id;
             getUser();
         }
     }
