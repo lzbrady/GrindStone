@@ -8,6 +8,19 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 
+
+const router = express.Router();
+const methodOverride = require('method-override');  // used to manipulate POST data
+
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(methodOverride( (req) => {
+    if (req.body && typeof req.body == 'object' && '_method' in req.body) {
+        const method = req.body._method;
+        delete req.body._method;
+        return method;
+    }
+}));
+
 const port = 3000;
 const dbURI = 'mongodb://localhost/grindstonedb';
 
@@ -166,6 +179,8 @@ app.use(function (req, res, next) {
     }
 });
 
+
+
 app.use('/projects', projectRoute);
 app.use('/jobs', jobsRoute);
 app.use('/users', userRoute);
@@ -174,5 +189,18 @@ app.use('/profile', myAccountRoute);
 app.listen(port, function () {
     console.log(`Listening on port number ${port}.`);
 });
+
+router.route('/user')
+
+    // GET all users
+    .get( (req, res) => {
+        USER.find({},  (err, users) => {
+            if (err) {
+                handleError(err, res, 'Users Not Found', 404);
+            } else {
+                res.json(users);
+            }
+        });
+    });
 
 module.exports = app;
