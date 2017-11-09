@@ -5,20 +5,6 @@ const express = require('express'),
     methodOverride = require('method-override'); // used to manipulate POST data
 const PROJECT = mongoose.model('Project');
 
-const jwt = require('express-jwt');
-const auth = jwt({
-    secret: 'Temp_Secret',
-    userProperty: 'payload'
-});
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-        return;
-    }
-    res.redirect('../login/login.html');
-}
-
 router.use(bodyParser.urlencoded({
     extended: true
 }));

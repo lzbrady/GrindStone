@@ -97,7 +97,7 @@
             }
         });
     }
-    
+
     function displayAllProjects(projects) {
         let currentProjectDiv;
         if (projects) {
@@ -106,15 +106,7 @@
                 currentProjectDiv.on('click', () => {
                     getSingleProjectAndRedirect(project);
                 });
-                // let comments;
-                // if (project.comment) {
-                //     comments = [];
-                //     project.comment.forEach((comment) => {
-                //         comments.push(comment);
-                //     });
-                // } else {
-                //     comments = "No comments yet";
-                // }
+
                 currentProjectDiv.append(
                     '<h1 class="project-name">' + project.name + '</h1>' +
                     '<div>' +

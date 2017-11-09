@@ -6,10 +6,6 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-// const passport = require('passport');
-// const session = require('express-session');
-// const localStrategy = require('passport-local').Strategy;
-
 const app = express();
 
 const port = 3000;
@@ -23,7 +19,6 @@ const USER = mongoose.model('User');
 
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
-// const authRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 
 mongoose.connect(dbURI, {
@@ -44,7 +39,6 @@ app.use(cors());
 
 app.use(logger('dev'));
 
-// app.use('/', authRoute);
 
 let token;
 
@@ -64,7 +58,7 @@ app.post('/login', (req, res) => {
                             username: user.username
                         };
                         token = jwt.sign(payload, 'secret', {
-                            expiresIn: "1h"
+                            expiresIn: 360000
                         });
 
                         res.json({
@@ -82,7 +76,17 @@ app.post('/login', (req, res) => {
             }
         });
     } else {
-        res.json("User not found");
+        res.json({
+            sucess: false,
+            message: "Authentication failed."
+        });
+    }
+});
+
+app.post('/logout', (req, res) => {
+    if (req && req.username) {
+        token = null;
+        res.json('Logged out');
     }
 });
 
@@ -165,7 +169,4 @@ app.listen(port, function () {
     console.log(`Listening on port number ${port}.`);
 });
 
-module.exports = {
-    'secret': 'thisismysecretivesecret',
-};
 module.exports = app;

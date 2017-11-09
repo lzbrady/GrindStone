@@ -43,6 +43,7 @@
     }
 
     function login(u) {
+        $('#invalid-cred').hide();
         const user = u || {
             username: $('[name="username-login"]').val(),
             password: $('[name="password-login"]').val()
@@ -54,10 +55,11 @@
             dataType: "JSON",
             data: user,
             success: (data) => {
-                if (data) {
+                if (data && data.success) {
                     window.location.href = '../user-page/my-account.html';
                 } else {
                     console.log("No match");
+                    $('#invalid-cred').show();
                 }
             },
             error: (request, status, error) => {
