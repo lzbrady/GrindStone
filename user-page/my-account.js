@@ -37,45 +37,54 @@
     }
 
     function addSkill() {
-        const skill = {
-            skill: $('[name="skill"]').val()
-        };
+        if ($('[name="skill"]').val() != '') {
+            const skill = {
+                skill: $('[name="skill"]').val()
+            };
 
-        $.ajax({
-            url: apiUrl + thisUser.username,
-            type: "POST",
-            dataType: "JSON",
-            data: skill,
-            success: (data) => {
-                thisUser = data;
-                displayUser();
-            },
-            error: (request, status, error) => {
-                console.log("Error: ", error, status, request);
-            }
-        });
+            $('[name="skill"]').val('');
+
+            $.ajax({
+                url: apiUrl + thisUser.username,
+                type: "POST",
+                dataType: "JSON",
+                data: skill,
+                success: (data) => {
+                    thisUser = data;
+                    displayUser();
+                },
+                error: (request, status, error) => {
+                    console.log("Error: ", error, status, request);
+                }
+            });
+        }
     }
 
     function addReview() {
-        const review = {
-            rating: $('[name="rating"]').val(),
-            description: $('[name="description"]').val(),
-        };
+        if ($('[name="rating"]').val() != '' && $('[name="description"]').val() != '') {
+            const review = {
+                rating: $('[name="rating"]').val(),
+                description: $('[name="description"]').val(),
+            };
 
-        $.ajax({
-            url: apiUrl + thisUser.username,
-            type: "POST",
-            dataType: "JSON",
-            data: review,
-            success: (data) => {
-                console.log(data);
-                thisUser = data;
-                displayUser();
-            },
-            error: (request, status, error) => {
-                console.log("Error: ", error, status, request);
-            }
-        });
+            $('[name="rating"]').val('');
+            $('[name="description"]').val('');
+
+            $.ajax({
+                url: apiUrl + thisUser.username,
+                type: "POST",
+                dataType: "JSON",
+                data: review,
+                success: (data) => {
+                    console.log(data);
+                    thisUser = data;
+                    displayUser();
+                },
+                error: (request, status, error) => {
+                    console.log("Error: ", error, status, request);
+                }
+            });
+        }
     }
 
     function loadSkills() {
