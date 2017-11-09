@@ -20,6 +20,7 @@ const USER = mongoose.model('User');
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
 const userRoute = require('./routes/user');
+const myAccountRoute = require('./routes/my-account');
 
 mongoose.connect(dbURI, {
     useMongoClient: true
@@ -51,14 +52,14 @@ app.post('/login', (req, res) => {
         }, (err, user) => {
             if (err) {
                 res.json(err);
-            } else {
+            } else if (user) {
                 bcrypt.compare(req.body.password, user.hash, (err, resp) => {
                     if (resp) {
                         const payload = {
                             username: user.username
                         };
                         token = jwt.sign(payload, 'secret', {
-                            expiresIn: 360000
+                            expiresIn: 60
                         });
 
                         res.json({
@@ -73,6 +74,11 @@ app.post('/login', (req, res) => {
                         });
                     }
                 });
+            } else {
+                res.json({
+                    sucess: false,
+                    message: "Authentication failed."
+                });
             }
         });
     } else {
@@ -83,6 +89,7 @@ app.post('/login', (req, res) => {
     }
 });
 
+// Logs out a user
 app.post('/logout', (req, res) => {
     if (req && req.username) {
         token = null;
@@ -136,8 +143,6 @@ app.post('/register', (req, res) => {
     }
 });
 
-
-
 app.use(function (req, res, next) {
     console.log(req);
 
@@ -164,6 +169,7 @@ app.use(function (req, res, next) {
 app.use('/projects', projectRoute);
 app.use('/jobs', jobsRoute);
 app.use('/users', userRoute);
+app.use('/profile', myAccountRoute);
 
 app.listen(port, function () {
     console.log(`Listening on port number ${port}.`);
