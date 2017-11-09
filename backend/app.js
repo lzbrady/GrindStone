@@ -22,7 +22,11 @@ router.use(methodOverride( (req) => {
 }));
 
 const port = process.env.PORT || 3000;
-const dbURI = 'mongodb://localhost/grindstonedb';
+let dbURI = 'mongodb://localhost/grindstonedb';
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MLAB_URI;
+}
+
 
 require("./models/projects");
 require("./models/jobs");

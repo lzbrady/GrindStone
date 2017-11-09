@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    const apiUrl = "http://localhost:3000/user/";
+    const apiUrl = "https://grindstone-app-api-username.herokuapp.com/user";
     let allUsers;
 
     // For testing
