@@ -11,6 +11,14 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+        return;
+    }
+    res.redirect('../login/login.html');
+}
+
 router.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -34,7 +42,7 @@ function handleError(err, res, msg, statusCode) {
 function makeComment(req, res, project) {
     const comment = {
         comment: req.body.comment,
-        name: req.body.name  
+        name: req.body.name
     };
     project.comments.push(comment);
     project.save((err, p) => {

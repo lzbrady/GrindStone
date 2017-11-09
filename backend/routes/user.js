@@ -1,15 +1,21 @@
 const express = require('express'),
     router = express.Router(),
-    mongoose = require('mongoose'); // mongodb connection
+    mongoose = require('mongoose'), // mongodb connection
+    bodyParser = require('body-parser'), // parse info from POST
+    methodOverride = require('method-override'); // used to manipulate POST data
 
-router.post('/api/register/', (req, res) => {
+const USER = mongoose.model('User');
 
-});
 
-router.post('/api/login/', (req, res) => {
+router.route('/')
+    .get((req, res) => {
+        USER.find({}, (err, users) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(users);
+            }
+        });
+    });
 
-});
-
-router.get('/api/profile/:userId', (req, res) => {
-
-});
+module.exports = router;
