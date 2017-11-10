@@ -30,7 +30,6 @@
     }
 
     function getUser() {
-        console.log(isMyAccount);
         $.ajax({
             url: apiUrl + thisUser.username,
             type: "GET",
@@ -90,7 +89,6 @@
                 dataType: "JSON",
                 data: review,
                 success: (data) => {
-                    console.log(data);
                     thisUser = data;
                     displayUser();
                 },
@@ -107,9 +105,9 @@
         }
 
         const skills = $('<div>').addClass('skills');
-        skills.append('<h3 id="skills-heading">Skills</h3>' +
-            '<input type="text" name="skill" id="skill-input">' +
-            '<div class="fab">+</div>');
+        skills.append('<input type="text" name="skill" id="skill-input">' +
+            '<div class="fab">Add</div>' +
+            '<h3 id="skills-heading">Skills</h3><hr id="skills-hr">');
 
         if (thisUser.skillList && thisUser.skillList != []) {
             skills.append('<ul class="skill-ul">');
@@ -122,7 +120,6 @@
     }
 
     function displayUser() {
-        console.log(thisUser);
         if (thisUser.username) {
             $('.container').empty();
 
@@ -145,11 +142,11 @@
                     reviews.append('<div class="review">' +
                         '<span class="rating">' + thisUser.reviews[i].rating + '</span>' +
                         '<span class="rating-description">' + thisUser.reviews[i].description + '</span>' +
-                        '<br><a class="reviewer" href="">- ' + thisUser.reviews[i].reviewer + '</a><hr></div>');
+                        '<br><p class="reviewer">- ' + thisUser.reviews[i].reviewer + '</p><hr></div>');
                 }
             }
-            reviews.append('<input type="text" name="rating">' +
-                '<input type="text" name="description">' +
+            reviews.append('<input id="review-rating" type="text" name="rating" placeholder="1-5"> <strong>/ 5</strong>' +
+                '<input id="review-description" type="text" name="description" placeholder="Please tell us why you left this rating">' +
                 '<button id="save-review">Post</button>');
             rightPane.append(reviews);
             $('.container').append(rightPane);

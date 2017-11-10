@@ -10,8 +10,7 @@ const jobsSchema = new mongoose.Schema({
     email: String,
     website: String,
     phone: String,
-    owner: String,
-    worker: String
+    owner: String
 });
 
 const Job = mongoose.model('Job', jobsSchema);

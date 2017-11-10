@@ -1,6 +1,7 @@
 (function () {
     "use strict";
-    const apiUrl = "https://grindstone-app-api-username.herokuapp.com/jobs";
+    // const apiUrl = "https://grindstone-app-api-username.herokuapp.com/jobs";
+    const apiUrl = "http://localhost:3000/jobs/";
     let allJobs;
 
     function getAllJobs() {
@@ -92,8 +93,6 @@
             website: $('[name="website"]').val(),
             phone: $('[name="phone"]').val(),
             comment: [],
-            owner: "Owner Name", //TODO: find user's name
-            worker: null,
         };
         $.ajax({
             url: apiUrl,
@@ -123,7 +122,7 @@
         }
         if (jobs && areJobs) {
             console.log(jobs);
-            jobs.forEach((job) => {
+            jobs.reverse().forEach((job) => {
                 currentJobDiv = $("<div>").addClass("job");
                 currentJobDiv.on('click', () => {
                     getSingleJobAndRedirect(job);
@@ -142,7 +141,6 @@
                     '<div>' +
                     '<p class="description">' + job.description + '</p>' +
                     '<p> Posted By: ' + job.owner + '</p>' +
-                    '<p> Claimed By: ' + (job.worker || "Not claimed yet") + '</p>' +
                     '</div>'
                 );
                 $(".wrapper").append(currentJobDiv);

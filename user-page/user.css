@@ -11,7 +11,8 @@ Color Schemes:
 #a5a5af
 */
 
-html, body {
+html,
+body {
     margin: 0px;
     padding: 0px;
     background-color: #fff;
@@ -40,27 +41,50 @@ header h1 {
 header .nav ul {
     list-style: none;
     text-align: center;
-    padding: 0px; 
+    padding: 0px;
 }
 
 header .nav ul li {
     display: inline-block;
     margin-left: 10px;
-    margin-right: 10px; 
+    margin-right: 10px;
     cursor: pointer;
 }
 
-.user-image {
-    width: 100px;
-    height: 100px;
+.user-list {
+    padding: 0px;
 }
 
-.user-card {
+#username {
+    margin-bottom: 5px;
+}
+
+.user {
     list-style: none;
+    background-color: #57bc90;
+    margin: auto;
+    margin-bottom: 5%;
+    width: 90%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.user-email {
+    margin-top: 0px;
+    margin-left: 3%;
 }
 
 li {
     display: list-item;
     text-align: -webkit-match-parent;
     border-bottom: 1px solid grey;
+}
+
+.one-skill {
+    background-color: #beffdd;
+    /* background-color: #efb95a; */
+    display: inline-block;
+    margin-right: 2%;
+    padding: 2px 10px 2px 10px;
+    margin-bottom: 3px;
 }

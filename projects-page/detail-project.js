@@ -77,7 +77,6 @@
             '<div>' +
             '<p class="description">' + project.description + '</p>' +
             '<p> Posted By: ' + project.owner + '</p>' +
-            '<p> Claimed By: ' + (project.worker || "Not claimed yet") + '</p>' +
             '</div>'
         );
         $(".wrapper").append(currentProjectDiv);

@@ -5,6 +5,9 @@ const express = require('express'),
     methodOverride = require('method-override'); // used to manipulate POST data
 const JOB = mongoose.model('Job');
 
+const LocalStorage = require('node-localstorage').LocalStorage;
+const localStore = new LocalStorage('./scratch');
+
 router.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -61,8 +64,7 @@ router.route('/')
             email: req.body.email,
             website: req.body.website,
             phone: req.body.phone,
-            owner: req.body.owner,
-            worker: req.body.worker
+            owner: (localStore.getItem("thisUser") || "Unclaimed")
         }, (err, job) => {
             if (err) {
                 res.statusCode = 400;

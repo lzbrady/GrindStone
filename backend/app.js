@@ -36,6 +36,7 @@ require("./models/users");
 
 const USER = mongoose.model('User');
 let thisUser = {};
+let currentUser = {};
 
 const projectRoute = require('./routes/projects');
 const jobsRoute = require('./routes/jobs');
@@ -44,21 +45,13 @@ const userRoute = require('./routes/user');
 
 mongoose.connect(dbURI, {
     useMongoClient: true
-}, (err, res) => {
+}, (err) => {
     if (err) {
         console.log(`ERROR connecting to ${dbURI}.${err}`);
     } else {
         console.log(`Successfully connected to ${dbURI}.`);
     }
 });
-
-/*  Error handling function.  Invoke with error information. */
-function handleError(err, res, msg, statusCode) {
-    res.status(statusCode);
-    err.status = statusCode;
-    err.message = `${err.status}, ${msg}. ${err.message}`;
-    res.json(err);
-}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -84,6 +77,7 @@ app.post('/login', (req, res) => {
                 res.json(err);
             } else if (user) {
                 thisUser = user;
+                localStore.setItem("thisUser", thisUser.username);
                 bcrypt.compare(req.body.password, user.hash, (err, resp) => {
                     if (resp) {
                         const payload = {
@@ -126,6 +120,7 @@ app.post('/logout', (req, res) => {
     if (req && req.username) {
         token = null;
         thisUser = null;
+        localStore.setItem("thisUser", thisUser.username);
         res.json('Logged out');
     }
 });
@@ -161,6 +156,7 @@ app.post('/register', (req, res) => {
                             skillList: [],
                             reviews: []
                         };
+                        localStore.setItem("thisUser", thisUser.username);
 
                         USER.create(thisUser, (err, user) => {
                             if (err) {
@@ -198,8 +194,6 @@ app.use(function (req, res, next) {
     }
 });
 
-
-
 app.use('/projects', projectRoute);
 app.use('/jobs', jobsRoute);
 app.use('/users', userRoute);
@@ -215,6 +209,7 @@ app.get('/profile/:username', (req, res) => {
             'username': req.params.username
         }, (err, user) => {
             if (user) {
+                currentUser = user;
                 res.json({
                     username: user.username,
                     email: user.email,
@@ -233,17 +228,17 @@ app.get('/profile/:username', (req, res) => {
 
 // Add a skill
 function addSkill(req, res) {
-    thisUser.skillList.push(req.body.skill);
-    thisUser.save((err, u) => {
+    currentUser.skillList.push(req.body.skill);
+    currentUser.save((err) => {
         if (err) {
             res.json(err);
         } else {
             res.json({
-                username: thisUser.username,
-                email: thisUser.email,
-                bio: thisUser.bio,
-                reviews: thisUser.reviews,
-                skillList: thisUser.skillList
+                username: currentUser.username,
+                email: currentUser.email,
+                bio: currentUser.bio,
+                reviews: currentUser.reviews,
+                skillList: currentUser.skillList
             });
         }
     });
@@ -256,17 +251,17 @@ function addReview(req, res) {
         description: req.body.description,
         reviewer: thisUser.username
     };
-    thisUser.reviews.push(review);
-    thisUser.save((err, u) => {
+    currentUser.reviews.push(review);
+    currentUser.save((err) => {
         if (err) {
             res.json(err);
         } else {
             res.json({
-                username: thisUser.username,
-                email: thisUser.email,
-                bio: thisUser.bio,
-                reviews: thisUser.reviews,
-                skillList: thisUser.skillList
+                username: currentUser.username,
+                email: currentUser.email,
+                bio: currentUser.bio,
+                reviews: currentUser.reviews,
+                skillList: currentUser.skillList
             });
         }
     });

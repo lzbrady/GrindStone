@@ -34,6 +34,22 @@ tr td {
     margin: 2%;
 }
 
+#review-description {
+    width: 70%;
+    height: 50px;
+    margin-left: 5%;
+}
+
+#review-rating {
+    width: 20px;
+    text-align: center;
+    margin-left: 3%;
+}
+
+#save-review {
+    margin-left: 3%;
+}
+
 .rating {
     font-weight: bold;
     margin-right: 15px;
@@ -62,8 +78,32 @@ tr td {
     border-radius: 2%;
 }
 
+#skill-input {
+    vertical-align: top;
+    margin-top: 3%;
+    border: none;
+    height: 18px;
+    margin-right: 5px;
+    width: 60%;
+    background-color: #b3e6ed;
+    outline: none;
+}
+
+#skill-input:focus {
+    border-bottom: 1.5px black solid;
+}
+
+#skills-hr {
+    border: none;
+    background-color: black;
+    height: 0.5px;
+    text-align: center;
+    margin-right: 9px;
+}
+
 #skills-heading {
-    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .skills li {
@@ -71,16 +111,13 @@ tr td {
 }
 
 .fab {
-    background-color: orange;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+    background-color: #efb95a;
+    width: 32%;
+    height: 20px;
     text-align: center;
-    font-size: 34px;
     font-weight: 900;
     display: inline-block;
-    float: right;
     margin-right: 5px;
-    margin-top: 5px;
+    margin-top: 3%;
     cursor: pointer;
 }

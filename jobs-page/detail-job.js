@@ -52,7 +52,6 @@
             '<div>' +
             '<p class="description">' + job.description + '</p>' +
             '<p> Posted By: ' + job.owner + '</p>' +
-            '<p> Claimed By: ' + (job.worker || "Not claimed yet") + '</p>' +
             '</div>'
         );
         $(".wrapper").append(currentJobDiv);

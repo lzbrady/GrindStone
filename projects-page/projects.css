@@ -5,7 +5,7 @@
 .project {
   width: 30%;
   overflow: hidden;
-  background-color: aquamarine;
+  background-color: #57bc90;
   margin: 20px;
   border: 3px solid #1A2930;
   padding: 20px;
@@ -13,6 +13,7 @@
   padding-top: 0px;
   display: inline-grid;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .project-name {
@@ -25,9 +26,22 @@
 }
 
 #add-project {
-  width: 75%;
+  width: 90%;
   margin: auto;
   display: block;
   height: 50px;
   margin-top: 10px;
+  background-color: #efb95a;
+  border-radius: 2%;
+  background: linear-gradient(#e1951c, #efb95a);
+  border: solid 1px #d0d0d0;
+  border-bottom: solid 3px #b2b1b1;
+}
+
+#add-project:hover {
+  background: -moz-linear-gradient(#efb95a, #e1951c);
+  background: linear-gradient(#efb95a, #e1951c);
+  border-bottom: solid 3px #b2b1b1;
+  box-shadow: inset 0 0 0 1px #efefef;
+  cursor: pointer;
 }

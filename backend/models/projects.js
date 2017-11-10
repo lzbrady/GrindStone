@@ -4,8 +4,7 @@ const projectsSchema = new mongoose.Schema({
     description: String,
     comments: [],
     email: String,
-    owner: String,
-    worker: String
+    owner: String
 });
 
 const Project = mongoose.model('Project', projectsSchema);

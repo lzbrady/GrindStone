@@ -1,6 +1,7 @@
 (function () {
     "use strict";
-    const apiUrl = "https://grindstone-app-api-username.herokuapp.com/projects";
+    // const apiUrl = "https://grindstone-app-api-username.herokuapp.com/projects";
+    const apiUrl = "http://localhost:3000/projects/";
     let allProjects;
 
     function getAllProjects() {
@@ -82,8 +83,6 @@
             description: $('[name="description"]').val(),
             email: $('[name="email"]').val(),
             comments: [],
-            owner: "Owner Name", //TODO: find user's name
-            worker: null,
         };
         $.ajax({
             url: apiUrl,
@@ -125,7 +124,6 @@
                     '<div>' +
                     '<p class="description">' + project.description + '</p>' +
                     '<p> Posted By: ' + project.owner + '</p>' +
-                    '<p> Claimed By: ' + (project.worker || "Not claimed yet") + '</p>' +
                     '</div>'
                 );
                 $(".wrapper").append(currentProjectDiv);
