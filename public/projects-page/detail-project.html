@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../template-style.css">
+    <link rel="stylesheet" href="detail-project-style.css">
+    <script src="../jquery-3.2.1.js"></script>
+    <script src="detail-project.js"></script>
+
+    <title>GrindStone | Job Detail</title>
+</head>
+
+<body>
+    <header>
+        <h1>GrindStone</h1>
+
+        <div class="top-right-header">
+            <a href="">Logout</a>
+            <a id="myAccount" href="javascript:void(0);">My Account</a>
+        </div>
+
+        <nav class="nav">
+            <ul>
+                <li>
+                    <a id="jobs" href="../jobs-page/jobs.html">Jobs</a>
+                </li>
+                <li>
+                    <a id="projects" href="./projects.html">Projects</a>
+                </li>
+                <li>
+                    <a id="users" href="../user-page/user.html">Users</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Overall container-->
+    <div class="container">
+        <div class="wrapper"></div>
+
+        <!--Comment Section-->
+        <div class="comments-container">
+            <!--Heading-->
+            <p id="comments-heading">Comments</p>
+
+            <div class="comments">
+            </div>
+
+            <!--Input to submit own comment-->
+            <div class="input-comment-container">
+                <button class="button" id="input-comment-btn">Comment</button>
+                <input class="input" id="input-comment" type="text" name="comment">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
