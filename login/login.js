@@ -1,6 +1,6 @@
 (function () {
-    // const apiUrl = "https://grindstone-app-api-username.herokuapp.com/";
-    const apiUrl = "http://localhost:3000/";
+    const apiUrl = "https://grindstone-app-api-username.herokuapp.com/";
+    // const apiUrl = "http://localhost:3000/";
 
     function register() {
         $('#password-error').hide();
